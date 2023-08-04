@@ -1,3 +1,4 @@
+import os
 import datetime
 from flask import Flask, render_template, request
 from pymongo import MongoClient
@@ -5,8 +6,11 @@ from pymongo import MongoClient
 
 def create_app():
     app = Flask(__name__)
+    USERNAME = os.getenv('USERNAME')
+    PASSWORD = os.getenv('PASSWORD')
+    SERVER = os.getenv('SERVER')
     client = MongoClient(
-        "mongodb+srv://al8ukerke87:fXzYsCxnv7QQKQn0@microblog.nt3zlw8.mongodb.net/microblog")
+        f"mongodb+srv://{USERNAME}:{PASSWORD}@{SERVER}.mongodb.net/microblog")
 
     app.db = client.microblog
 
